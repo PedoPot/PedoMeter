@@ -1,0 +1,5 @@
+FROM ollama/ollama
+COPY Modelfile .
+RUN ollama serve & \
+    sleep 10 && \
+    ollama create conversation-evaluator -f Modelfile
