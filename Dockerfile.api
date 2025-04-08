@@ -1,0 +1,13 @@
+FROM python:3.12
+
+WORKDIR /code
+
+COPY ./requirements.txt /code/requirements.txt
+
+RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
+
+COPY ./app /code/app
+
+# Set : 'ENV OLLAMA_HOST=http://0.0.0.0:ollama_ai_port' in the docker compose
+
+CMD ["fastapi", "run", "app/main.py", "--port", "80"]
