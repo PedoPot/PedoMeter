@@ -15,12 +15,12 @@ Key indicators to evaluate:
 - Sexual comments or innuendo directed at or about minors
 - Dismissal of age-related boundaries
 
-After analyzing the conversation, return ONLY a single decimal number between 0 and 1:
+After analyzing the conversation, return ONLY a single integer number between 0 and 100:
 - 0: No indicators of risk detected
-- 0.01-0.3: Very mild concerning elements, but likely benign
-- 0.3-0.6: Moderate concern, shows some potential warning signs
-- 0.6-0.9: High concern, multiple warning signs present
-- 0.9-1: Severe concern, strong indicators of potential risk
+- 1-30: Very mild concerning elements, but likely benign
+- 31-60: Moderate concern, shows some potential warning signs
+- 61-90: High concern, multiple warning signs present
+- 91-100: Severe concern, strong indicators of potential risk
 
 Provide only the numerical score without any explanation, reasoning, or additional text.
 """

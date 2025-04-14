@@ -34,27 +34,27 @@ async def compute_score(request: Conversations):
         # Extract the score from the response
         score_text = response["message"]["content"].strip()
 
-        # Try to parse the score as a number between 0 and 1
+        # Try to parse the score as a number between 0 and 100
         try:
             risk_score = float(score_text)
 
             # Validate the risk score range
-            if 0 <= risk_score <= 1:
+            if 0 <= risk_score <= 100:
                 return {"risk_score": risk_score}
             else:
-                raise ValueError("Score outside valid range (0-1)")
+                raise ValueError("Score outside valid range (0-100)")
 
         except ValueError:
             # If the model didn't return just a number, try to extract it
             import re
-            score_match = re.search(r'^0(\.\d+)?|1(\.0+)?$', score_text)
+            score_match = re.search(r'^(100|[0-9]{1,2})(\.[0-9]+)?$', score_text)
             if score_match:
                 risk_score = float(score_match.group(0))
                 return {"risk_score": risk_score}
             else:
                 raise HTTPException(
                     status_code=422,
-                    detail="Could not extract a valid risk score (0-1) from the model's response"
+                    detail="Could not extract a valid risk score (0-100) from the model's response"
                 )
 
     except Exception as e:
