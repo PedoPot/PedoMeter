@@ -47,7 +47,7 @@ async def compute_score(request: Conversations):
         except ValueError:
             # If the model didn't return just a number, try to extract it
             import re
-            score_match = re.search(r'0(\.\d+)?|1(\.0+)?', score_text)
+            score_match = re.search(r'^0(\.\d+)?|1(\.0+)?$', score_text)
             if score_match:
                 risk_score = float(score_match.group(0))
                 return {"risk_score": risk_score}
